@@ -19,9 +19,15 @@ class Graph:
     def getEClosureS(self, s_):
         r = set()
         r.add(s_)
-        for edge in self.m_lEdges:
-            if edge.m_nFrom == s_ and edge.m_sInput == '':
-                r |= self.getEClosureS(edge.m_nTo)
+        que = []
+        que.append(s_)
+
+        while len(que)>0:
+            tmp = que.pop(0)
+            for edge in self.m_lEdges:
+                if edge.m_nFrom == tmp and edge.m_sInput == '' and edge.m_nTo not in r:
+                    r.add(edge.m_nTo)
+                    que.append(edge.m_nTo)
         return r
     
     def getEClosureT(self, t_):
