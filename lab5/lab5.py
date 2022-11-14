@@ -63,18 +63,35 @@ class Parser:
     def initTable(self):
         for l in self.m_lRules:
             self.m_dM[l[0]] = {}
-
         for l in self.m_lRules:
-            first = self.m_dFirst[l[1]]
-            for i in first:
-                if i != '':
-                    self.m_dM[l[0]][i] = (l[0],l[1])
-            if '' in first:
-                follow = self.m_dFollow[l[0]]
-                for i in follow:
-                    if i != '':
-                        self.m_dM[l[0]][i] = (l[0],l[1])
-                        
+            for a in self.m_dFirst[l[1]]:
+                if(a != ""):
+                    self.m_dM[l[0]][a] = l
+            if("" in self.m_dFirst[l[1]]):
+                for b in self.m_dFollow[l[0]]:
+                    if(b != ""):
+                        self.m_dM[l[0]][b] = l
+        return
+    def parse(self, inp_):
+        stack = []
+        stack.append("$")
+        stack.append(LL.m_sStart)
+        inp_ += "$"
+        while(True):
+            print("%s\t%s" % ("".join(stack), inp_))
+            X = stack.pop()
+            if not X.isupper():
+                if X == '$':
+                    break
+                inp_ = inp_[1:]
+
+            elif self.m_dM.get(X) and self.m_dM[X].get(inp_[0]):
+                for i in self.m_dM[X][inp_[0]][1][::-1]:
+                    stack.append(i)
+            else:
+                print("Parse error")
+                break
+                    
     def printRules(self):
         for r in self.m_lRules:
             print("%s=>%s" % (r[0], r[1]))
@@ -99,6 +116,6 @@ if __name__ == '__main__':
     LL.computeFollow()
     LL.initTable()
 
-    LL.printFirst()
-    LL.printFollow()
-    LL.printTable()
+    inp = input("Input string: ")
+    LL.parse(inp)
+
