@@ -1,0 +1,868 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> assign expression
+Rule 2     assign -> NAME =
+Rule 3     statement -> expression
+Rule 4     expression -> expression < expression
+Rule 5     expression -> expression > expression
+Rule 6     expression -> expression + expression
+Rule 7     expression -> expression - expression
+Rule 8     expression -> expression * expression
+Rule 9     expression -> expression / expression
+Rule 10    expression -> ( expression )
+Rule 11    expression -> NUMBER
+Rule 12    expression -> NAME
+Rule 13    expression -> expression gofalse & expression goto
+Rule 14    expression -> expression gotrue | expression goto
+Rule 15    gotrue -> <empty>
+Rule 16    gofalse -> <empty>
+Rule 17    goto -> <empty>
+
+Terminals, with rules where they appear
+
+&                    : 13
+(                    : 10
+)                    : 10
+*                    : 8
++                    : 6
+-                    : 7
+/                    : 9
+<                    : 4
+=                    : 2
+>                    : 5
+NAME                 : 2 12
+NUMBER               : 11
+error                : 
+|                    : 14
+
+Nonterminals, with rules where they appear
+
+assign               : 1
+expression           : 1 3 4 4 5 5 6 6 7 7 8 8 9 9 10 13 13 14 14
+gofalse              : 13
+goto                 : 13 14
+gotrue               : 14
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . assign expression
+    (3) statement -> . expression
+    (2) assign -> . NAME =
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    NAME            shift and go to state 4
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    statement                      shift and go to state 1
+    assign                         shift and go to state 2
+    expression                     shift and go to state 3
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> assign . expression
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 7
+
+state 3
+
+    (3) statement -> expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+    $end            reduce using rule 3 (statement -> expression .)
+    <               shift and go to state 9
+    >               shift and go to state 10
+    +               shift and go to state 11
+    -               shift and go to state 12
+    *               shift and go to state 13
+    /               shift and go to state 14
+    &               reduce using rule 16 (gofalse -> .)
+    |               reduce using rule 15 (gotrue -> .)
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 4
+
+    (2) assign -> NAME . =
+    (12) expression -> NAME .
+
+    =               shift and go to state 17
+    <               reduce using rule 12 (expression -> NAME .)
+    >               reduce using rule 12 (expression -> NAME .)
+    +               reduce using rule 12 (expression -> NAME .)
+    -               reduce using rule 12 (expression -> NAME .)
+    *               reduce using rule 12 (expression -> NAME .)
+    /               reduce using rule 12 (expression -> NAME .)
+    &               reduce using rule 12 (expression -> NAME .)
+    |               reduce using rule 12 (expression -> NAME .)
+    $end            reduce using rule 12 (expression -> NAME .)
+
+
+state 5
+
+    (10) expression -> ( . expression )
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 18
+
+state 6
+
+    (11) expression -> NUMBER .
+
+    <               reduce using rule 11 (expression -> NUMBER .)
+    >               reduce using rule 11 (expression -> NUMBER .)
+    +               reduce using rule 11 (expression -> NUMBER .)
+    -               reduce using rule 11 (expression -> NUMBER .)
+    *               reduce using rule 11 (expression -> NUMBER .)
+    /               reduce using rule 11 (expression -> NUMBER .)
+    &               reduce using rule 11 (expression -> NUMBER .)
+    |               reduce using rule 11 (expression -> NUMBER .)
+    $end            reduce using rule 11 (expression -> NUMBER .)
+    )               reduce using rule 11 (expression -> NUMBER .)
+
+
+state 7
+
+    (1) statement -> assign expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+    $end            reduce using rule 1 (statement -> assign expression .)
+    <               shift and go to state 9
+    >               shift and go to state 10
+    +               shift and go to state 11
+    -               shift and go to state 12
+    *               shift and go to state 13
+    /               shift and go to state 14
+    &               reduce using rule 16 (gofalse -> .)
+    |               reduce using rule 15 (gotrue -> .)
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 8
+
+    (12) expression -> NAME .
+
+    <               reduce using rule 12 (expression -> NAME .)
+    >               reduce using rule 12 (expression -> NAME .)
+    +               reduce using rule 12 (expression -> NAME .)
+    -               reduce using rule 12 (expression -> NAME .)
+    *               reduce using rule 12 (expression -> NAME .)
+    /               reduce using rule 12 (expression -> NAME .)
+    &               reduce using rule 12 (expression -> NAME .)
+    |               reduce using rule 12 (expression -> NAME .)
+    $end            reduce using rule 12 (expression -> NAME .)
+    )               reduce using rule 12 (expression -> NAME .)
+
+
+state 9
+
+    (4) expression -> expression < . expression
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 19
+
+state 10
+
+    (5) expression -> expression > . expression
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 20
+
+state 11
+
+    (6) expression -> expression + . expression
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 21
+
+state 12
+
+    (7) expression -> expression - . expression
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 22
+
+state 13
+
+    (8) expression -> expression * . expression
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 23
+
+state 14
+
+    (9) expression -> expression / . expression
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 24
+
+state 15
+
+    (13) expression -> expression gofalse . & expression goto
+
+    &               shift and go to state 25
+
+
+state 16
+
+    (14) expression -> expression gotrue . | expression goto
+
+    |               shift and go to state 26
+
+
+state 17
+
+    (2) assign -> NAME = .
+
+    (               reduce using rule 2 (assign -> NAME = .)
+    NUMBER          reduce using rule 2 (assign -> NAME = .)
+    NAME            reduce using rule 2 (assign -> NAME = .)
+
+
+state 18
+
+    (10) expression -> ( expression . )
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+    )               shift and go to state 27
+    <               shift and go to state 9
+    >               shift and go to state 10
+    +               shift and go to state 11
+    -               shift and go to state 12
+    *               shift and go to state 13
+    /               shift and go to state 14
+    &               reduce using rule 16 (gofalse -> .)
+    |               reduce using rule 15 (gotrue -> .)
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 19
+
+    (4) expression -> expression < expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! reduce/reduce conflict for & resolved using rule 4 (expression -> expression < expression .)
+  ! reduce/reduce conflict for | resolved using rule 4 (expression -> expression < expression .)
+    <               reduce using rule 4 (expression -> expression < expression .)
+    >               reduce using rule 4 (expression -> expression < expression .)
+    &               reduce using rule 4 (expression -> expression < expression .)
+    |               reduce using rule 4 (expression -> expression < expression .)
+    $end            reduce using rule 4 (expression -> expression < expression .)
+    )               reduce using rule 4 (expression -> expression < expression .)
+    +               shift and go to state 11
+    -               shift and go to state 12
+    *               shift and go to state 13
+    /               shift and go to state 14
+
+  ! +               [ reduce using rule 4 (expression -> expression < expression .) ]
+  ! -               [ reduce using rule 4 (expression -> expression < expression .) ]
+  ! *               [ reduce using rule 4 (expression -> expression < expression .) ]
+  ! /               [ reduce using rule 4 (expression -> expression < expression .) ]
+  ! <               [ shift and go to state 9 ]
+  ! >               [ shift and go to state 10 ]
+  ! &               [ reduce using rule 16 (gofalse -> .) ]
+  ! |               [ reduce using rule 15 (gotrue -> .) ]
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 20
+
+    (5) expression -> expression > expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! reduce/reduce conflict for & resolved using rule 5 (expression -> expression > expression .)
+  ! reduce/reduce conflict for | resolved using rule 5 (expression -> expression > expression .)
+    <               reduce using rule 5 (expression -> expression > expression .)
+    >               reduce using rule 5 (expression -> expression > expression .)
+    &               reduce using rule 5 (expression -> expression > expression .)
+    |               reduce using rule 5 (expression -> expression > expression .)
+    $end            reduce using rule 5 (expression -> expression > expression .)
+    )               reduce using rule 5 (expression -> expression > expression .)
+    +               shift and go to state 11
+    -               shift and go to state 12
+    *               shift and go to state 13
+    /               shift and go to state 14
+
+  ! +               [ reduce using rule 5 (expression -> expression > expression .) ]
+  ! -               [ reduce using rule 5 (expression -> expression > expression .) ]
+  ! *               [ reduce using rule 5 (expression -> expression > expression .) ]
+  ! /               [ reduce using rule 5 (expression -> expression > expression .) ]
+  ! <               [ shift and go to state 9 ]
+  ! >               [ shift and go to state 10 ]
+  ! &               [ reduce using rule 16 (gofalse -> .) ]
+  ! |               [ reduce using rule 15 (gotrue -> .) ]
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 21
+
+    (6) expression -> expression + expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! reduce/reduce conflict for & resolved using rule 6 (expression -> expression + expression .)
+  ! reduce/reduce conflict for | resolved using rule 6 (expression -> expression + expression .)
+    <               reduce using rule 6 (expression -> expression + expression .)
+    >               reduce using rule 6 (expression -> expression + expression .)
+    +               reduce using rule 6 (expression -> expression + expression .)
+    -               reduce using rule 6 (expression -> expression + expression .)
+    &               reduce using rule 6 (expression -> expression + expression .)
+    |               reduce using rule 6 (expression -> expression + expression .)
+    $end            reduce using rule 6 (expression -> expression + expression .)
+    )               reduce using rule 6 (expression -> expression + expression .)
+    *               shift and go to state 13
+    /               shift and go to state 14
+
+  ! *               [ reduce using rule 6 (expression -> expression + expression .) ]
+  ! /               [ reduce using rule 6 (expression -> expression + expression .) ]
+  ! <               [ shift and go to state 9 ]
+  ! >               [ shift and go to state 10 ]
+  ! +               [ shift and go to state 11 ]
+  ! -               [ shift and go to state 12 ]
+  ! &               [ reduce using rule 16 (gofalse -> .) ]
+  ! |               [ reduce using rule 15 (gotrue -> .) ]
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 22
+
+    (7) expression -> expression - expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! reduce/reduce conflict for & resolved using rule 7 (expression -> expression - expression .)
+  ! reduce/reduce conflict for | resolved using rule 7 (expression -> expression - expression .)
+    <               reduce using rule 7 (expression -> expression - expression .)
+    >               reduce using rule 7 (expression -> expression - expression .)
+    +               reduce using rule 7 (expression -> expression - expression .)
+    -               reduce using rule 7 (expression -> expression - expression .)
+    &               reduce using rule 7 (expression -> expression - expression .)
+    |               reduce using rule 7 (expression -> expression - expression .)
+    $end            reduce using rule 7 (expression -> expression - expression .)
+    )               reduce using rule 7 (expression -> expression - expression .)
+    *               shift and go to state 13
+    /               shift and go to state 14
+
+  ! *               [ reduce using rule 7 (expression -> expression - expression .) ]
+  ! /               [ reduce using rule 7 (expression -> expression - expression .) ]
+  ! <               [ shift and go to state 9 ]
+  ! >               [ shift and go to state 10 ]
+  ! +               [ shift and go to state 11 ]
+  ! -               [ shift and go to state 12 ]
+  ! &               [ reduce using rule 16 (gofalse -> .) ]
+  ! |               [ reduce using rule 15 (gotrue -> .) ]
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 23
+
+    (8) expression -> expression * expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! reduce/reduce conflict for & resolved using rule 8 (expression -> expression * expression .)
+  ! reduce/reduce conflict for | resolved using rule 8 (expression -> expression * expression .)
+    <               reduce using rule 8 (expression -> expression * expression .)
+    >               reduce using rule 8 (expression -> expression * expression .)
+    +               reduce using rule 8 (expression -> expression * expression .)
+    -               reduce using rule 8 (expression -> expression * expression .)
+    *               reduce using rule 8 (expression -> expression * expression .)
+    /               reduce using rule 8 (expression -> expression * expression .)
+    &               reduce using rule 8 (expression -> expression * expression .)
+    |               reduce using rule 8 (expression -> expression * expression .)
+    $end            reduce using rule 8 (expression -> expression * expression .)
+    )               reduce using rule 8 (expression -> expression * expression .)
+
+  ! <               [ shift and go to state 9 ]
+  ! >               [ shift and go to state 10 ]
+  ! +               [ shift and go to state 11 ]
+  ! -               [ shift and go to state 12 ]
+  ! *               [ shift and go to state 13 ]
+  ! /               [ shift and go to state 14 ]
+  ! &               [ reduce using rule 16 (gofalse -> .) ]
+  ! |               [ reduce using rule 15 (gotrue -> .) ]
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 24
+
+    (9) expression -> expression / expression .
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! reduce/reduce conflict for & resolved using rule 9 (expression -> expression / expression .)
+  ! reduce/reduce conflict for | resolved using rule 9 (expression -> expression / expression .)
+    <               reduce using rule 9 (expression -> expression / expression .)
+    >               reduce using rule 9 (expression -> expression / expression .)
+    +               reduce using rule 9 (expression -> expression / expression .)
+    -               reduce using rule 9 (expression -> expression / expression .)
+    *               reduce using rule 9 (expression -> expression / expression .)
+    /               reduce using rule 9 (expression -> expression / expression .)
+    &               reduce using rule 9 (expression -> expression / expression .)
+    |               reduce using rule 9 (expression -> expression / expression .)
+    $end            reduce using rule 9 (expression -> expression / expression .)
+    )               reduce using rule 9 (expression -> expression / expression .)
+
+  ! <               [ shift and go to state 9 ]
+  ! >               [ shift and go to state 10 ]
+  ! +               [ shift and go to state 11 ]
+  ! -               [ shift and go to state 12 ]
+  ! *               [ shift and go to state 13 ]
+  ! /               [ shift and go to state 14 ]
+  ! &               [ reduce using rule 16 (gofalse -> .) ]
+  ! |               [ reduce using rule 15 (gotrue -> .) ]
+
+    gofalse                        shift and go to state 15
+    gotrue                         shift and go to state 16
+
+state 25
+
+    (13) expression -> expression gofalse & . expression goto
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 28
+
+state 26
+
+    (14) expression -> expression gotrue | . expression goto
+    (4) expression -> . expression < expression
+    (5) expression -> . expression > expression
+    (6) expression -> . expression + expression
+    (7) expression -> . expression - expression
+    (8) expression -> . expression * expression
+    (9) expression -> . expression / expression
+    (10) expression -> . ( expression )
+    (11) expression -> . NUMBER
+    (12) expression -> . NAME
+    (13) expression -> . expression gofalse & expression goto
+    (14) expression -> . expression gotrue | expression goto
+
+    (               shift and go to state 5
+    NUMBER          shift and go to state 6
+    NAME            shift and go to state 8
+
+    expression                     shift and go to state 29
+
+state 27
+
+    (10) expression -> ( expression ) .
+
+    <               reduce using rule 10 (expression -> ( expression ) .)
+    >               reduce using rule 10 (expression -> ( expression ) .)
+    +               reduce using rule 10 (expression -> ( expression ) .)
+    -               reduce using rule 10 (expression -> ( expression ) .)
+    *               reduce using rule 10 (expression -> ( expression ) .)
+    /               reduce using rule 10 (expression -> ( expression ) .)
+    &               reduce using rule 10 (expression -> ( expression ) .)
+    |               reduce using rule 10 (expression -> ( expression ) .)
+    $end            reduce using rule 10 (expression -> ( expression ) .)
+    )               reduce using rule 10 (expression -> ( expression ) .)
+
+
+state 28
+
+    (13) expression -> expression gofalse & expression . goto
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (17) goto -> .
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! reduce/reduce conflict for & resolved using rule 16 (gofalse -> .)
+  ! reduce/reduce conflict for | resolved using rule 15 (gotrue -> .)
+    <               shift and go to state 9
+    >               shift and go to state 10
+    +               shift and go to state 11
+    -               shift and go to state 12
+    *               shift and go to state 13
+    /               shift and go to state 14
+    $end            reduce using rule 17 (goto -> .)
+    )               reduce using rule 17 (goto -> .)
+    &               reduce using rule 16 (gofalse -> .)
+    |               reduce using rule 15 (gotrue -> .)
+
+  ! <               [ reduce using rule 17 (goto -> .) ]
+  ! >               [ reduce using rule 17 (goto -> .) ]
+  ! +               [ reduce using rule 17 (goto -> .) ]
+  ! -               [ reduce using rule 17 (goto -> .) ]
+  ! *               [ reduce using rule 17 (goto -> .) ]
+  ! /               [ reduce using rule 17 (goto -> .) ]
+  ! &               [ reduce using rule 17 (goto -> .) ]
+  ! |               [ reduce using rule 17 (goto -> .) ]
+
+    gofalse                        shift and go to state 15
+    goto                           shift and go to state 30
+    gotrue                         shift and go to state 16
+
+state 29
+
+    (14) expression -> expression gotrue | expression . goto
+    (4) expression -> expression . < expression
+    (5) expression -> expression . > expression
+    (6) expression -> expression . + expression
+    (7) expression -> expression . - expression
+    (8) expression -> expression . * expression
+    (9) expression -> expression . / expression
+    (13) expression -> expression . gofalse & expression goto
+    (14) expression -> expression . gotrue | expression goto
+    (17) goto -> .
+    (16) gofalse -> .
+    (15) gotrue -> .
+
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! reduce/reduce conflict for & resolved using rule 16 (gofalse -> .)
+  ! reduce/reduce conflict for | resolved using rule 15 (gotrue -> .)
+    <               shift and go to state 9
+    >               shift and go to state 10
+    +               shift and go to state 11
+    -               shift and go to state 12
+    *               shift and go to state 13
+    /               shift and go to state 14
+    $end            reduce using rule 17 (goto -> .)
+    )               reduce using rule 17 (goto -> .)
+    &               reduce using rule 16 (gofalse -> .)
+    |               reduce using rule 15 (gotrue -> .)
+
+  ! <               [ reduce using rule 17 (goto -> .) ]
+  ! >               [ reduce using rule 17 (goto -> .) ]
+  ! +               [ reduce using rule 17 (goto -> .) ]
+  ! -               [ reduce using rule 17 (goto -> .) ]
+  ! *               [ reduce using rule 17 (goto -> .) ]
+  ! /               [ reduce using rule 17 (goto -> .) ]
+  ! &               [ reduce using rule 17 (goto -> .) ]
+  ! |               [ reduce using rule 17 (goto -> .) ]
+
+    gotrue                         shift and go to state 16
+    goto                           shift and go to state 31
+    gofalse                        shift and go to state 15
+
+state 30
+
+    (13) expression -> expression gofalse & expression goto .
+
+    <               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    >               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    +               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    -               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    *               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    /               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    &               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    |               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    $end            reduce using rule 13 (expression -> expression gofalse & expression goto .)
+    )               reduce using rule 13 (expression -> expression gofalse & expression goto .)
+
+
+state 31
+
+    (14) expression -> expression gotrue | expression goto .
+
+    <               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    >               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    +               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    -               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    *               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    /               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    &               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    |               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    $end            reduce using rule 14 (expression -> expression gotrue | expression goto .)
+    )               reduce using rule 14 (expression -> expression gotrue | expression goto .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for < in state 28 resolved as shift
+WARNING: shift/reduce conflict for > in state 28 resolved as shift
+WARNING: shift/reduce conflict for + in state 28 resolved as shift
+WARNING: shift/reduce conflict for - in state 28 resolved as shift
+WARNING: shift/reduce conflict for * in state 28 resolved as shift
+WARNING: shift/reduce conflict for / in state 28 resolved as shift
+WARNING: shift/reduce conflict for < in state 29 resolved as shift
+WARNING: shift/reduce conflict for > in state 29 resolved as shift
+WARNING: shift/reduce conflict for + in state 29 resolved as shift
+WARNING: shift/reduce conflict for - in state 29 resolved as shift
+WARNING: shift/reduce conflict for * in state 29 resolved as shift
+WARNING: shift/reduce conflict for / in state 29 resolved as shift
+WARNING: reduce/reduce conflict in state 19 resolved using rule (expression -> expression < expression)
+WARNING: rejected rule (gofalse -> <empty>) in state 19
+WARNING: reduce/reduce conflict in state 19 resolved using rule (expression -> expression < expression)
+WARNING: rejected rule (gotrue -> <empty>) in state 19
+WARNING: reduce/reduce conflict in state 20 resolved using rule (expression -> expression > expression)
+WARNING: rejected rule (gofalse -> <empty>) in state 20
+WARNING: reduce/reduce conflict in state 20 resolved using rule (expression -> expression > expression)
+WARNING: rejected rule (gotrue -> <empty>) in state 20
+WARNING: reduce/reduce conflict in state 21 resolved using rule (expression -> expression + expression)
+WARNING: rejected rule (gofalse -> <empty>) in state 21
+WARNING: reduce/reduce conflict in state 21 resolved using rule (expression -> expression + expression)
+WARNING: rejected rule (gotrue -> <empty>) in state 21
+WARNING: reduce/reduce conflict in state 22 resolved using rule (expression -> expression - expression)
+WARNING: rejected rule (gofalse -> <empty>) in state 22
+WARNING: reduce/reduce conflict in state 22 resolved using rule (expression -> expression - expression)
+WARNING: rejected rule (gotrue -> <empty>) in state 22
+WARNING: reduce/reduce conflict in state 23 resolved using rule (expression -> expression * expression)
+WARNING: rejected rule (gofalse -> <empty>) in state 23
+WARNING: reduce/reduce conflict in state 23 resolved using rule (expression -> expression * expression)
+WARNING: rejected rule (gotrue -> <empty>) in state 23
+WARNING: reduce/reduce conflict in state 24 resolved using rule (expression -> expression / expression)
+WARNING: rejected rule (gofalse -> <empty>) in state 24
+WARNING: reduce/reduce conflict in state 24 resolved using rule (expression -> expression / expression)
+WARNING: rejected rule (gotrue -> <empty>) in state 24
+WARNING: reduce/reduce conflict in state 28 resolved using rule (gofalse -> <empty>)
+WARNING: rejected rule (goto -> <empty>) in state 28
+WARNING: reduce/reduce conflict in state 28 resolved using rule (gotrue -> <empty>)
+WARNING: rejected rule (goto -> <empty>) in state 28
+WARNING: reduce/reduce conflict in state 29 resolved using rule (gofalse -> <empty>)
+WARNING: rejected rule (goto -> <empty>) in state 29
+WARNING: reduce/reduce conflict in state 29 resolved using rule (gotrue -> <empty>)
+WARNING: rejected rule (goto -> <empty>) in state 29
